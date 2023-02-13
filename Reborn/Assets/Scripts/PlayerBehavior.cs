@@ -7,16 +7,21 @@ namespace Reborn
 {    public class PlayerBehavior : MonoBehaviour
     {
         [SerializeField] private PlayerInput _PlayerInput;
-        [SerializeField] private GameObject _bullet;
+        [SerializeField] private BulletPool _BulletPool;
         [SerializeField] private Transform _gunPos;
+        [SerializeField] private Transform _firingPos;
 
         private void Update()
         {
-            
             if (_PlayerInput.IsAttack)
             {
-                GameObject bullet = GameObject.Instantiate(_bullet, _gunPos.transform.position, _gunPos.transform.rotation);
-                //bullet.GetComponent<Bullet>().
+                GameObject bullet = _BulletPool.GetBullet();
+                if (bullet != null)
+                {
+                    bullet.transform.position = _firingPos.transform.position;
+                    bullet.transform.rotation = _gunPos.transform.rotation;
+                    bullet.SetActive(true);
+                }
             }
 
             if (_PlayerInput.IsSpecial)
@@ -25,5 +30,4 @@ namespace Reborn
             }
         }
     }
-
 }
