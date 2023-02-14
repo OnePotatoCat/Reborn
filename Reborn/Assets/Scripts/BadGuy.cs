@@ -36,7 +36,6 @@ namespace Reborn
         {
             Vector3 moveDirection = new Vector3(Player.transform.position.x  - this.transform.position.x, 0f, Player.transform.position.z - this.transform.position.z);
             moveDirection = moveDirection.normalized;
-            Debug.Log(moveDirection);
             Vector3 motion = moveDirection * (_MovementSpeed * _MovementSpeedMultiplier * Time.deltaTime);
             _CharController.Move(motion);
 
