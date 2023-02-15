@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -230,11 +230,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0ebfcfbc2d8ebe4d856fb9010be537e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapHeight: 40
-  mapWidth: 40
+  mapHeight: 30
+  mapWidth: 30
   wallPrefab: {fileID: 1917995947418475627, guid: 2b8ee6361cc152341b4b21773efb21cb,
     type: 3}
   floorPrefab: {fileID: 0}
+--- !u!4 &158819079 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5604820956685594848, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3129529984970387986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +635,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b0921351c3d9b64cbc9604796c85751, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1770134261 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5269609833918393459, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3129529984970387986}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3129529984970387986
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -693,9 +705,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3129529984970387992, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
         type: 3}
+      propertyPath: gunPos
+      value: 
+      objectReference: {fileID: 158819079}
+    - target: {fileID: 3129529984970387992, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
+        type: 3}
+      propertyPath: health
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3129529984970387992, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
+        type: 3}
+      propertyPath: firingPos
+      value: 
+      objectReference: {fileID: 1770134261}
+    - target: {fileID: 3129529984970387992, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
+        type: 3}
       propertyPath: _BulletPool
       value: 
       objectReference: {fileID: 1635618754}
+    - target: {fileID: 3129529984970387992, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
+        type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1529708009}
+    - target: {fileID: 3129529984970387992, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
+        type: 3}
+      propertyPath: turretPrefab
+      value: 
+      objectReference: {fileID: 8050301914441259339, guid: 46c263b78b9ca6b479a3c15a2904b689,
+        type: 3}
     - target: {fileID: 5878525491694833921, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
         type: 3}
       propertyPath: m_RootOrder

@@ -10,6 +10,9 @@ namespace Reborn
         [SerializeField] private GameObject player;
         [SerializeField] private GameObject altas;
 
+
+
+
         private void Awake()
         {
             mapGenerator.GenerateMap();
@@ -17,5 +20,11 @@ namespace Reborn
             Instantiate(altas, altasPos, Quaternion.identity);
             player.transform.position = new Vector3(mapGenerator.CenterPos.x, player.transform.position.y, mapGenerator.CenterPos.y);
         }
+
+        public void PlayerDie()
+        {
+            player.transform.position = new Vector3(mapGenerator.CenterPos.x, player.transform.position.y, mapGenerator.CenterPos.y);
+        }
+
     }
 }

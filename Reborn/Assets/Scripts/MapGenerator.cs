@@ -16,7 +16,7 @@ namespace Reborn
 
         [Header("Tile Grid")]
         [SerializeField] int mapHeight;
-        [SerializeField] int  mapWidth;
+        [SerializeField] int mapWidth;
         private TileType[,] tiles;
 
         private Vector2 _CenterPos;
@@ -36,8 +36,8 @@ namespace Reborn
         private float chanceChangeDir = 0.5f;
         private float chanceDuplicate = 0.05f;
         private float chanceDestroy = 0.05f;
-        private int maxWalker = 5;
-        float percentToFill = 0.5f;
+        private int maxWalker = 10;
+        float percentToFill = 0.42f;
         int maxIteration = 50000;
 
         [SerializeField] private GameObject wallPrefab, floorPrefab;
