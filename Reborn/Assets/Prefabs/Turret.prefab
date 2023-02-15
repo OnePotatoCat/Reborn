@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9215145013762045447}
   - component: {fileID: 1533183899098965831}
   m_Layer: 0
-  m_Name: Gun
+  m_Name: TurretGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,15 +26,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6424382762077096058}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.8, y: 0.8000001, z: 0.8000001}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5587340483122061369}
   m_Father: {fileID: 5782498743462668817}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &1395433508634043688
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -144,6 +144,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6c71db39ac0c0b4e8b055b965babefd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gunRotation: {fileID: 7813138775087516831}
+  firingPos: {fileID: 5587340483122061369}
+  _Range: 6
+  _RotateSpeed: 180
+  _Damage: 0.5
+  _FireRate: 3
+  _State: 0
+  _BulletPool: {fileID: 0}
 --- !u!1 &8250353505024236169
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,7 +262,7 @@ GameObject:
   - component: {fileID: 3641641573418183799}
   - component: {fileID: 6362128809287177930}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: 'Shaft '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -267,14 +275,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8684046973828538415}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.3, z: 0.625}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 1.25}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.74, z: -0.294}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7813138775087516831}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &1745099935320852052
 MeshFilter:
   m_ObjectHideFlags: 0

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5269609833918393459}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: FiringPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3129529984970387988}
   - component: {fileID: 3129529984970387989}
   - component: {fileID: 3129529984970387992}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,8 +131,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PlayerInput: {fileID: 3129529984970387988}
   _BulletPool: {fileID: 0}
-  _gunPos: {fileID: 5604820956685594848}
-  _firingPos: {fileID: 5269609833918393459}
+  gunPos: {fileID: 0}
+  firingPos: {fileID: 0}
+  gameManager: {fileID: 0}
+  turretPrefab: {fileID: 0}
+  health: 5
 --- !u!1 &1554551542037396247
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,7 +148,7 @@ GameObject:
   - component: {fileID: 7708962278406243858}
   - component: {fileID: 2313441663472264700}
   - component: {fileID: 4067904032766931680}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -243,7 +246,7 @@ GameObject:
   - component: {fileID: 3129529984761440219}
   - component: {fileID: 3129529984761440218}
   - component: {fileID: 3129529984761440217}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -361,7 +364,7 @@ GameObject:
   - component: {fileID: 6665177582414750665}
   - component: {fileID: 2085866792511727391}
   - component: {fileID: 5121963059882449220}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -462,7 +465,7 @@ GameObject:
   - component: {fileID: 6328829972323168927}
   - component: {fileID: 4257868827594904830}
   - component: {fileID: 5371977072928142699}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}

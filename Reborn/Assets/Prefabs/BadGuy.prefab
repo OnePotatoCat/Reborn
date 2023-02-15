@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6048147904992166134}
   - component: {fileID: 6048147904992166130}
   - component: {fileID: 6048147904992166131}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6048147905415966199}
   - component: {fileID: 6048147905415966195}
   - component: {fileID: 6048147905415966192}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6048147905445316180}
   - component: {fileID: 6048147905445316176}
   - component: {fileID: 6048147905445316177}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - component: {fileID: 6048147906347058891}
   - component: {fileID: 6048147906347058888}
   - component: {fileID: 6048147906347058889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BadGuy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -305,6 +305,7 @@ MonoBehaviour:
   _MovementSpeedMultiplier: 1
   _RotateSpeed: 180
   _Rotation: {fileID: 6048147906347058894}
+  _Health: 5
 --- !u!143 &6048147906347058891
 CharacterController:
   m_ObjectHideFlags: 0
