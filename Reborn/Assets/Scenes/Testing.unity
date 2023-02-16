@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 4ec6f39efb231584a8f6a89c20a4bb89, type: 2}
 --- !u!1 &95771586
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 108364609}
   - component: {fileID: 108364610}
+  - component: {fileID: 108364611}
   m_Layer: 0
   m_Name: GridSystem
   m_TagString: Untagged
@@ -235,6 +236,20 @@ MonoBehaviour:
   wallPrefab: {fileID: 1917995947418475627, guid: 2b8ee6361cc152341b4b21773efb21cb,
     type: 3}
   floorPrefab: {fileID: 0}
+--- !u!114 &108364611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 108364608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f7e89988de796248bf9ad4c6439bed6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  surfaces:
+  - {fileID: 1396371335}
 --- !u!4 &158819079 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5604820956685594848, guid: fbc04c3b6cf8ccf419c0ca388ce22fe6,
@@ -491,12 +506,13 @@ GameObject:
   - component: {fileID: 1396371333}
   - component: {fileID: 1396371332}
   - component: {fileID: 1396371331}
+  - component: {fileID: 1396371335}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!65 &1396371331
 BoxCollider:
@@ -569,13 +585,42 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396371330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: -0.005, z: 100}
-  m_LocalScale: {x: 200, y: 0.01, z: 200}
+  m_LocalPosition: {x: 50, y: -0.005, z: 50}
+  m_LocalScale: {x: 100, y: 0.01, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1396371335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396371330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.33333334
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1 &1529708008
 GameObject:
   m_ObjectHideFlags: 0
@@ -908,21 +953,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 6048147904992166135, guid: 0dfdac1dba7dd904fb13bf117f53cec2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6048147905415966196, guid: 0dfdac1dba7dd904fb13bf117f53cec2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6048147905445316181, guid: 0dfdac1dba7dd904fb13bf117f53cec2,
-        type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6048147906347058892, guid: 0dfdac1dba7dd904fb13bf117f53cec2,
         type: 3}
       propertyPath: m_Name
@@ -988,6 +1018,5 @@ PrefabInstance:
       propertyPath: Player
       value: 
       objectReference: {fileID: 3129529984970387987}
-    m_RemovedComponents:
-    - {fileID: 6048147906347058889, guid: 0dfdac1dba7dd904fb13bf117f53cec2, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dfdac1dba7dd904fb13bf117f53cec2, type: 3}
