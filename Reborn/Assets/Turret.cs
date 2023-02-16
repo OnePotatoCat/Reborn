@@ -15,13 +15,14 @@ namespace Reborn
         }
 
         [SerializeField] private Transform gunRotation;
+        [SerializeField] private Transform firingDir;
         [SerializeField] private Transform firingPos;
-        [SerializeField] private float _Range = 4f;
+        [SerializeField] private float _Range = 8f;
         [SerializeField] private float _RotateSpeed = 180f;
         [SerializeField] private float _Damage = 0.5f;
         [SerializeField] private float _FireRate = 3.0f;
         [SerializeField] private TurretState _State = TurretState.idle;
-        [SerializeField] private BulletPool _BulletPool;
+        [SerializeField] public BulletPool bulletPool;
 
         public Vector3 gunDirection
         {
@@ -66,7 +67,6 @@ namespace Reborn
             Collider[] enemys = Physics.OverlapSphere(this.transform.position, _Range, enemyLayer);
             if (enemys.Length > 0)
             {
-                Debug.Log(enemys[0].name);
                 float[] distance = new float[enemys.Length];
                 for (int i = 0; i < enemys.Length; i++)
                 {
@@ -91,11 +91,11 @@ namespace Reborn
             if (State == TurretState.attack && FireRate == 0)
             {
                 FireRate = 3f;
-                GameObject bullet = _BulletPool.GetBullet();
+                GameObject bullet = bulletPool.GetBullet();
                 if (bullet != null)
                 {
                     bullet.transform.position = firingPos.transform.position;
-                    bullet.transform.rotation = gunRotation.transform.rotation;
+                    bullet.transform.rotation = firingDir.transform.rotation;
                     bullet.SetActive(true);
                 }
             }
@@ -114,7 +114,6 @@ namespace Reborn
                     minIndex = i;
                 }
             }
-
             return minIndex;
         }
 

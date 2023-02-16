@@ -306,7 +306,7 @@ namespace Reborn
 
         private void SpawnObject(int x, int y, GameObject wallPrefab)
         {
-            Instantiate(wallPrefab, new Vector3((float)x*2 + 1f, 1.5f, (float)y*2 + 1f), Quaternion.identity);
+            Instantiate(wallPrefab, new Vector3((float)x*2 + 1f, 0.5f, (float)y*2 + 1f), Quaternion.identity, this.transform);
         }
 
         public void GenerateMap()

@@ -130,11 +130,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PlayerInput: {fileID: 3129529984970387988}
-  _BulletPool: {fileID: 0}
-  gunPos: {fileID: 0}
-  firingPos: {fileID: 0}
+  bulletPool: {fileID: 0}
+  gunPos: {fileID: 5604820956685594848}
+  firingPos: {fileID: 5269609833918393459}
   gameManager: {fileID: 0}
-  turretPrefab: {fileID: 0}
+  turretPrefab: {fileID: 8050301914441259339, guid: 46c263b78b9ca6b479a3c15a2904b689,
+    type: 3}
   health: 5
 --- !u!1 &1554551542037396247
 GameObject:
@@ -260,14 +261,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3129529984761440213}
-  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: 0, y: 5, z: -8.66}
+  m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
+  m_LocalPosition: {x: -12.248, y: 10, z: -6.124}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5878525491694833921}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
 --- !u!20 &3129529984761440219
 Camera:
   m_ObjectHideFlags: 0
@@ -295,7 +296,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 9
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

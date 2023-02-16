@@ -16,6 +16,7 @@ namespace Reborn
             MoveLeft,
             MoveRight,
             AttackAction,
+            BoostSpeed,
             SpecialAction,
         }
 

@@ -11,7 +11,8 @@ namespace Reborn
             );
 
         public bool IsAttack => InputSystem.IsDown(InputSystem.InputMap.AttackAction);
-        public bool IsSpecial => InputSystem.IsDown(InputSystem. InputMap.SpecialAction);
+        public bool IsBoost => InputSystem.IsDown(InputSystem.InputMap.BoostSpeed);
+        public bool IsSudoku => InputSystem.IsDown(InputSystem. InputMap.SpecialAction);
         private bool IsKey(InputSystem.InputMap action) => InputSystem.IsKey(action);
     }
 }
