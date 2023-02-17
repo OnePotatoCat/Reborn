@@ -13,6 +13,8 @@ namespace Reborn
 
         Atlas atlas;
         PlayerBehavior playerBehavior;
+        float respawnTimer = 5f;
+
 
         private void Awake()
         {
@@ -31,6 +33,13 @@ namespace Reborn
 
         public void PlayerDie()
         {
+            StartCoroutine(RespawnPlayer());
+            //atlas.Respawn();
+        }
+
+        IEnumerator RespawnPlayer()
+        {
+            yield return new WaitForSeconds(respawnTimer);
             atlas.Respawn();
         }
 

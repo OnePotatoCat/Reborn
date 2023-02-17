@@ -23,7 +23,6 @@ namespace Reborn
                     break;
 
                 case ("Wall"):
-                    Debug.Log(collision.collider.name);
                     this.gameObject.SetActive(false);
                     break;
 

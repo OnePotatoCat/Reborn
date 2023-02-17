@@ -23,6 +23,7 @@ namespace Reborn
         [SerializeField] private Transform _Rotation;
 
         [SerializeField] private float _Health;
+        [SerializeField] private float damage = 1f;
 
         [SerializeField] private EnemyState _State = EnemyState.move;
         [SerializeField] private float sightRange = 8f;
@@ -122,6 +123,19 @@ namespace Reborn
             agent.speed = _MovementSpeedMultiplier * _MovementSpeed;
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log(collision.collider.name);
+            if (collision.collider.tag == "Player")
+            {
+                // reduce enemy health
+                var player = collision.collider.gameObject.GetComponent<PlayerBehavior>();
+                player.TakeDamage(damage);
+                Destroy(this.gameObject);
+                //this.gameObject.SetActive(false);
+            }
+
+        }
 
 #if UNITY_EDITOR
         private void OnDrawGizmos()

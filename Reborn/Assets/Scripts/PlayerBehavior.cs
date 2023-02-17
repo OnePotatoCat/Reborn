@@ -14,8 +14,7 @@ namespace Reborn
         [SerializeField] public GameManager gameManager;
         [SerializeField] private GameObject turretPrefab;
 
-        [SerializeField] private float health = 5;
-
+        [SerializeField] private float health = 5f;
 
         private void Update()
         {
@@ -53,7 +52,6 @@ namespace Reborn
             Die();
         }
 
-
         private void Die()
         {
             this.gameObject.SetActive(false);
@@ -66,6 +64,5 @@ namespace Reborn
             GameObject newTurret = Instantiate(turretPrefab, pos, Quaternion.identity);
             newTurret.GetComponent<Turret>().bulletPool = this.bulletPool;
         }
-
     }
 }
