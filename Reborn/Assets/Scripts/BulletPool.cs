@@ -11,6 +11,13 @@ namespace Reborn
         public GameObject bullet;
         public int amountToPool;
 
+        // Sound Effects
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip[] hitSFX;
+        [SerializeField] private AudioClip wallSFX;
+        [SerializeField] private float sfxVolume = 1f;
+
+
         // Start is called before the first frame update
         void Awake()
         {

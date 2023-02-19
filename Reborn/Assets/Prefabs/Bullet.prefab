@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7699312950206276992}
   - component: {fileID: 6008601263739494824}
   - component: {fileID: 1440395850840786879}
+  - component: {fileID: -5494303494781217651}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -51,7 +52,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8209445095757650709}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -63,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 15303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c486714b10df3144e8177055af55dd98, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -111,4 +112,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 269f77626f3ad6b47abea2bb8773dd24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ShootSpeed: 12
+  bp: {fileID: 9085157711774861504, guid: 0a6927b7bbdb3734cbb951a79ad45762, type: 3}
+  _ShootSpeed: 22
+  damage: 1
+--- !u!54 &-5494303494781217651
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8209445095757650709}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 4
+  m_CollisionDetection: 0

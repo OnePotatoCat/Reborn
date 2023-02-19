@@ -17,5 +17,16 @@ namespace Reborn
                 surfaces[i].BuildNavMesh();
             }
         }
+
+        public void DelayRebake()
+        {
+            StartCoroutine(RebakeLater());
+        }
+
+        IEnumerator RebakeLater()
+        {
+            yield return new WaitForSeconds(0.5f);
+            BakeNavMesh();
+        }
     }
 }

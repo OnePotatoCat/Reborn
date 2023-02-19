@@ -17,17 +17,25 @@ namespace Reborn
         public NavMeshAgent agent;
         [SerializeField] public GameObject Player;
         [SerializeField] public GameObject Altas;
-        [SerializeField] private float _MovementSpeed = 1.5f;
-        [SerializeField] private float _MovementSpeedMultiplier = 1f;
-        [SerializeField] private float _RotateSpeed = 130f;
+        [SerializeField] public ScoreManager scoreManager;
+        [SerializeField] private float _MovementSpeed = 5f;
+        [SerializeField] private float _RotateSpeed = 180f;
         [SerializeField] private Transform _Rotation;
 
-        [SerializeField] private float _Health;
-        [SerializeField] private float damage = 1f;
+        [SerializeField]
+        private float _Health = 3f;
+        private float damage = 1f;
 
         [SerializeField] private EnemyState _State = EnemyState.move;
         [SerializeField] private float sightRange = 8f;
         [SerializeField] private float attakRange = 1f;
+        [SerializeField] public int level;
+
+        // Sound Effects
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip[] explodeSFX;
+        [SerializeField] private float sfxVolume = 1f;
+
 
         public Vector3 FaceDirection
         {
@@ -40,7 +48,8 @@ namespace Reborn
             _Health -= damagePoint;
             if (_Health <= 0)
             {
-                Destroy(this.gameObject);
+                scoreManager.AddScore(1);
+                StartCoroutine(SelfDestruct());
             }
         }
 
@@ -53,52 +62,68 @@ namespace Reborn
         
         private GameObject target;
         private int playerLayer;
+        private int turretLayer;
         const float posUpdate = 0.8f;
         private float posUpdateTimer;
+        private float normalSpeed;
+        private bool dead = false;
 
         private void Start()
         {
             posUpdateTimer = posUpdate;
             playerLayer = LayerMask.GetMask("Player");
-            agent.speed = _MovementSpeedMultiplier * _MovementSpeed;
+            turretLayer = LayerMask.GetMask("Turret");
+            _Health = _Health + Mathf.Floor(level / 3);
+            damage = damage + Mathf.Floor(level / 4);
+            normalSpeed =  _MovementSpeed * ( 1 + (level-1)/10);
+            agent.speed = normalSpeed;
+            agent.autoRepath = true;
         }
 
         // Update is called once per frame
         void Update()
         {
-            // Check if in range of any players objects
-            Collider[] players = Physics.OverlapSphere(this.transform.position, sightRange, playerLayer);
-            if (players.Length > 0)
+            if (!dead)
             {
-                float[] distance = new float[players.Length];
-                for (int i = 0; i < players.Length; i++)
+                // Check if in range of any players objects
+                Collider[] players = Physics.OverlapSphere(this.transform.position, sightRange, playerLayer);
+                if (players.Length > 0)
                 {
-                    distance[i] = Vector3.Distance(this.transform.position, players[i].transform.position);
+                    float[] distance = new float[players.Length];
+                    for (int i = 0; i < players.Length; i++)
+                    {
+                        distance[i] = Vector3.Distance(this.transform.position, players[i].transform.position);
+                    }
+                    agent.speed = normalSpeed * 2.5f;
+                    State = EnemyState.attack;
+                    target = players[ClosetTargetIndex(distance)].gameObject;
+                    agent.isStopped = true;
+                    transform.position = Vector3.MoveTowards(transform.position, players[ClosetTargetIndex(distance)].transform.position, normalSpeed * 1.5f * Time.deltaTime);
+
+                }
+                else
+                {
+                    agent.isStopped = false;
+                    agent.speed = normalSpeed;
+                    State = EnemyState.move;
+                    target = Altas;
                 }
 
-                State = EnemyState.attack;
-                target = players[ClosetTargetIndex(distance)].gameObject;
-            }
-            else
-            {
-                State = EnemyState.move;
-                target = Altas;
-            }
 
+                Vector3 moveDirection = new Vector3(target.transform.position.x - this.transform.position.x, 0f, target.transform.position.z - this.transform.position.z);
+                moveDirection = moveDirection.normalized;
 
-            Vector3 moveDirection = new Vector3(target.transform.position.x  - this.transform.position.x, 0f, target.transform.position.z - this.transform.position.z);
-            moveDirection = moveDirection.normalized;
+                posUpdateTimer -= Time.deltaTime;
+                if (posUpdateTimer <= 0)
+                {
+                    posUpdateTimer = posUpdate;
+                    agent.SetDestination(target.transform.position);
+                }
 
-            posUpdateTimer -= Time.deltaTime;
-            if (posUpdateTimer <= 0)
-            {
-                posUpdateTimer = posUpdate;
-                agent.SetDestination(target.transform.position);
-            }
-            
-            if (moveDirection != Vector3.zero)
-            {
-                FaceDirection = Vector3.RotateTowards(FaceDirection, moveDirection, _RotateSpeed * Mathf.Deg2Rad * Time.deltaTime, 0f);
+                if (moveDirection != Vector3.zero)
+                {
+                    FaceDirection = Vector3.RotateTowards(FaceDirection, moveDirection, _RotateSpeed * Mathf.Deg2Rad * Time.deltaTime, 0f);
+                }
             }
         }
 
@@ -117,12 +142,6 @@ namespace Reborn
             return minIndex;
         }
 
-        public void UpgradeSpeed()
-        {
-            _MovementSpeedMultiplier += 0.1f;
-            agent.speed = _MovementSpeedMultiplier * _MovementSpeed;
-        }
-
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log(collision.collider.name);
@@ -131,10 +150,33 @@ namespace Reborn
                 // reduce enemy health
                 var player = collision.collider.gameObject.GetComponent<PlayerBehavior>();
                 player.TakeDamage(damage);
-                Destroy(this.gameObject);
-                //this.gameObject.SetActive(false);
+                StartCoroutine(SelfDestruct());
+            }
+            else if (collision.collider.tag == "Turret")
+            {
+                // reduce enemy health
+                var turret = collision.collider.gameObject.GetComponent<Turret>();
+                turret.TakeDamage(damage);
+                StartCoroutine(SelfDestruct());
+            }
+            else if (collision.collider.tag == "Atlas")
+            {
+                // reduce enemy health
+                var atlas = collision.collider.gameObject.GetComponent<Atlas>();
+                atlas.TakeDamage(damage);
+                StartCoroutine(SelfDestruct());
             }
 
+        }
+
+        IEnumerator SelfDestruct()
+        {
+            int clipToPlay = Random.Range(0, explodeSFX.Length);
+            audioSource.PlayOneShot(explodeSFX[clipToPlay], sfxVolume);
+            agent.isStopped=true;
+            dead = true;
+            yield return new WaitForSeconds(explodeSFX[clipToPlay].length);
+            Destroy(this.gameObject);
         }
 
 #if UNITY_EDITOR

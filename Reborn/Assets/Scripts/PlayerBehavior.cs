@@ -11,15 +11,24 @@ namespace Reborn
         [SerializeField] private Transform gunPos;
         [SerializeField] private Transform firingPos;
 
+        [SerializeField] public NavigationBaker nb;
         [SerializeField] public GameManager gameManager;
+        [SerializeField] public Atlas atlas;
         [SerializeField] private GameObject turretPrefab;
 
-        [SerializeField] private float health = 5f;
+        [SerializeField] private float health = 4f;
+        [SerializeField] public HealthBar healthBar;
+
+        // Sound Effects
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip fireSFX;
+        [SerializeField] private float sfxVolume = 1f;
 
         private void Update()
         {
             if (_PlayerInput.IsAttack)
             {
+                audioSource.PlayOneShot(fireSFX, sfxVolume);
                 GameObject bullet = bulletPool.GetBullet();
                 if (bullet != null)
                 {
@@ -33,12 +42,12 @@ namespace Reborn
             {
                 CommitSoduku();
             }
-
         }
 
         public void TakeDamage(float damagePoint)
         {
             health -= damagePoint;
+            healthBar.SetHealth((int)health);
             if (health <= 0)
             {
                 CommitSoduku();
@@ -47,7 +56,8 @@ namespace Reborn
 
         private void CommitSoduku()
         {
-            health = 5;
+            health = 4;
+            healthBar.SetHealth((int)health);
             SpawnTurret();
             Die();
         }
@@ -62,7 +72,11 @@ namespace Reborn
         {
             Vector3 pos = new Vector3 ((int)this.transform.position.x, 0.5f, (int)this.transform.position.z);
             GameObject newTurret = Instantiate(turretPrefab, pos, Quaternion.identity);
-            newTurret.GetComponent<Turret>().bulletPool = this.bulletPool;
+            Turret turret = newTurret.GetComponent<Turret>();
+            turret.bulletPool = this.bulletPool;
+            turret.atlas = this.atlas; ;
+            turret.nb = this.nb;
+            nb.BakeNavMesh();
         }
     }
 }

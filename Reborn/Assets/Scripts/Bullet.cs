@@ -6,6 +6,7 @@ namespace Reborn
 {
     public class Bullet : MonoBehaviour
     {
+        [SerializeField] private BulletPool bp;
         [SerializeField] private float _ShootSpeed = 12.0f;
         [SerializeField] private float damage = 1f;
 
@@ -44,6 +45,7 @@ namespace Reborn
 
             if (accumTime > 90f)
             {
+                accumTime = 0f;
                 this.gameObject.SetActive(false);
             }
         }

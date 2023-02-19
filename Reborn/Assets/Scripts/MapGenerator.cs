@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-//https://github.com/skylarbeaty/ProceduralGenerationOfNuclearThrone/blob/master/NuclearThroneGeneration/Assets/Scripts/LevelGenerator.cs
+
 namespace Reborn
 {
     public class MapGenerator : MonoBehaviour
@@ -15,17 +15,19 @@ namespace Reborn
         }
 
         [Header("Tile Grid")]
-        [SerializeField] int mapHeight;
-        [SerializeField] int mapWidth;
-        private TileType[,] tiles;
+        [SerializeField] public int mapHeight;
+        [SerializeField] public int mapWidth;
 
+        // Tile Grid System 
+        public TileType[,] tiles;
         private Vector2 _CenterPos;
+        public Vector2Int centerPosInGrid;
         public Vector2 CenterPos
         {
             get => _CenterPos;
             set => _CenterPos = value;
         }
-
+        
         struct Walker
         {
             public Vector2 dir;
@@ -58,21 +60,22 @@ namespace Reborn
             walkers = new List<Walker>();
             Walker newWalker = new Walker();
             newWalker.dir = RandomDirection();
-            Vector2 centerPos = new Vector2(Mathf.RoundToInt(mapWidth / 2.0f),
+            centerPosInGrid = new Vector2Int(Mathf.RoundToInt(mapWidth / 2.0f),
                                      Mathf.RoundToInt(mapHeight / 2.0f));
 
-            _CenterPos = centerPos * 2 + new Vector2(1 ,1);
+
+            _CenterPos = centerPosInGrid * 2 + new Vector2(1 ,1);
 
             // Set Center Stage
             for (int x = -2; x <= 2; x++)
             {
                 for (int y = -2; y <= 2 ; y++)
                 {
-                    tiles[(int)centerPos.x + x, (int)centerPos.y + y] = TileType.floor;
+                    tiles[centerPosInGrid.x + x, centerPosInGrid.y + y] = TileType.floor;
                 }
             }
 
-            newWalker.pos = centerPos;
+            newWalker.pos = centerPosInGrid;
             walkers.Add(newWalker);
 
         }
@@ -203,7 +206,7 @@ namespace Reborn
                                 // Find wall chunk group and remove them if the group are less than 3 walls 
                                 List<(int, int)> coorList= new List<(int, int)>();
                                 coorList = FindWallGroup(x + checkX, y + checkY, coorList);
-                                if (!CheckWallGroupBesideEmpty(coorList) && coorList.Count < 3)
+                                if (!CheckWallGroupBesideEmpty(coorList) && coorList.Count < 2)
                                 {
                                     foreach (var coor in coorList)
                                     {
@@ -293,9 +296,10 @@ namespace Reborn
                     switch (tiles[x, y])
                     {
                         case TileType.wall:
-                            SpawnObject(x, y, wallPrefab);
+                            SpawnWall(x, y);
                             break;
                         case TileType.floor:
+                            SpawnFloor(x, y);
                             break;
                         case TileType.empty:
                             break;
@@ -304,9 +308,14 @@ namespace Reborn
             }
         }
 
-        private void SpawnObject(int x, int y, GameObject wallPrefab)
+        private void SpawnWall(int x, int y)
         {
             Instantiate(wallPrefab, new Vector3((float)x*2 + 1f, 0.5f, (float)y*2 + 1f), Quaternion.identity, this.transform);
+        }
+
+        private void SpawnFloor(int x, int y)
+        {
+            Instantiate(floorPrefab, new Vector3((float)x * 2 + 1f, -0.125f, (float)y * 2 + 1f), Quaternion.identity, this.transform);
         }
 
         public void GenerateMap()
